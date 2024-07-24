@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "331638091343",
+    "project_id": "tv-repair-bc6f5",
+    "storage_bucket": "tv-repair-bc6f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331638091343:android:ca443b6b872016d858443a",
+        "android_client_info": {
+          "package_name": "com.jiasaz.tv_repair"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331638091343-0k2ghlov4h97qbb9jeaflrtsoo4jj3fc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNtghxRqf2neVsSNR9P1jjxy98nsvOfZw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331638091343-0k2ghlov4h97qbb9jeaflrtsoo4jj3fc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "331638091343-702nrnrht4vkspon6820hh23r9fp2s3k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jiasaz.tvRepair",
+                "app_store_id": "12345678"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
