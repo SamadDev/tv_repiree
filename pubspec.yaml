@@ -42,6 +42,12 @@ dependencies:
   shimmer:
   url_launcher:
   flutter_slidable:
+  sqflite:
+  path:
+  path_provider:
+  permission_handler:
+  excel:
+  share_plus:
 
 
 

@@ -12,6 +12,10 @@ import 'package:tv_repair/model/invoiceGenModel.dart';
 import 'package:tv_repair/model/invoiceModel.dart';
 import 'package:tv_repair/model/tvModel.dart';
 import 'package:tv_repair/model/userModel.dart';
+import 'package:excel/excel.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart';
+import 'dart:io';
 
 class FireBaseHelperFunctions {
   Query customerCollection = FirebaseFirestore.instance.collection('Customer');
@@ -37,6 +41,47 @@ class FireBaseHelperFunctions {
   //   return querySnapshot;
   // }
 
+
+  Future<void> exportAndShareInvoices() async {
+    // 1. Fetch data from Firestore
+    QuerySnapshot querySnapshot = await invoiceCollection
+        .orderBy("addedDate", descending: true)
+        .get();
+
+    // 2. Convert data to Excel format
+    var excel = Excel.createExcel();
+    Sheet sheetObject = excel['Sheet1'];
+
+    // Add headers
+    sheetObject.appendRow(['Invoice ID', 'Date', 'Amount', 'Status', 'Raw Data']);
+
+    // Add data rows
+    for (var doc in querySnapshot.docs) {
+      var data = doc.data() as Map<String, dynamic>;
+      sheetObject.appendRow([
+        doc.id,
+        data['addedDate']?.toDate()?.toString() ?? 'N/A',
+        data['amount']?.toString() ?? 'N/A',
+        data['status']?.toString() ?? 'N/A',
+        data.toString(), // Add raw data for debugging
+      ]);
+    }
+
+    // 3. Save the Excel file
+    var directory = await getApplicationDocumentsDirectory();
+    var filePath = '${directory.path}/invoices_debug.xlsx';
+    var file = File(filePath);
+    await file.writeAsBytes(excel.encode()!);
+
+    // 4. Share the file
+    await Share.shareFiles([filePath], text: 'Invoices Export (Debug)');
+
+    // 5. Print some debug information
+    print('Total documents: ${querySnapshot.docs.length}');
+    if (querySnapshot.docs.isNotEmpty) {
+      print('Sample document data: ${querySnapshot.docs.first.data()}');
+    }
+  }
   Stream<QuerySnapshot> getAllInvoices(int status) {
     var querySnapshot = invoiceCollection
         .where("status", isEqualTo: status)

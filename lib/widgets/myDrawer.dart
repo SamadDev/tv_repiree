@@ -211,6 +211,22 @@ class _MyDrawerState extends State<MyDrawer> {
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     )),
+                Divider(), 
+                InkWell(
+                    onTap: () {
+                      FireBaseHelperFunctions().exportAndShareInvoices();
+                    },
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.backup,
+                        color: primaryColor(1.0),
+                      ),
+                      title: Text(
+                        "Back Up",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                    )),
                 Divider(),
                 InkWell(
                     onTap: () {
